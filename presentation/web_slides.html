@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flickboard - Presentasi UTS Pemrograman Mobile</title>
+  <style>
+    :root {
+      --bg: #0A0E17;
+      --card-bg: #121929;
+      --card-border: #004D98;
+      --accent-gold: #EDBB00;
+      --accent-blue: #004D98;
+      --accent-crimson: #A50044;
+      --accent-green: #00E676;
+      --text-white: #FFFFFF;
+      --text-muted: #A0AFC8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-white); overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+    
+    .top-bar {
+      height: 4px;
+      display: flex;
+      width: 100%;
+    }
+    .stripe-crimson { background-color: var(--accent-crimson); flex: 1; }
+    .stripe-blue { background-color: var(--accent-blue); flex: 1; }
+    .stripe-gold { background-color: var(--accent-gold); flex: 1; }
+
+    .slide-viewport {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 50px;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1200px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .slide.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-tag {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .slide-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 24px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+    .slide-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-crimson));
+      border-radius: 2px;
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .cards-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .cards-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-gold);
+    }
+    .card.crimson-border { border-color: var(--accent-crimson); }
+    .card.green-border { border-color: var(--accent-green); }
+    .card.gold-border { border-color: var(--accent-gold); }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 14px;
+    }
+    .card-title.white { color: #FFF; }
+
+    ul.bullet-list {
+      list-style-type: none;
+    }
+    ul.bullet-list li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-white);
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+    ul.bullet-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold);
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    /* Title Slide Special */
+    .title-hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .title-hero h1 {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #FFF 40%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .title-hero h2 {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+    }
+    .title-hero p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 750px;
+      margin: 0 auto 36px auto;
+      line-height: 1.6;
+    }
+    .meta-badge {
+      display: inline-block;
+      padding: 10px 24px;
+      background: rgba(0, 77, 152, 0.3);
+      border: 1px solid var(--accent-blue);
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #FFF;
+    }
+
+    /* Controls Bottom */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 40px;
+      background: rgba(18, 25, 41, 0.95);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .slide-counter {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-gold);
+    }
+    .nav-btn {
+      background: var(--accent-blue);
+      color: white;
+      border: 1px solid var(--accent-gold);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover { background: #003366; }
+    .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="stripe-crimson"></div>
+    <div class="stripe-blue"></div>
+    <div class="stripe-gold"></div>
+  </div>
+
+  <div class="slide-viewport">
+    <!-- SLIDE 1 -->
+    <div class="slide active">
+      <div class="title-hero">
+        <div class="category-tag">UJIAN TENGAH SEMESTER (UTS) • PEMROGRAMAN MOBILE</div>
+        <h1>FLICKBOARD</h1>
+        <h2>FC Barcelona Tactical Planner & Match Simulation Engine</h2>
+        <p>Aplikasi Mobile & Web Modern Berbasis Flutter, BLoC State Management, Integrasi Live AllSportsAPI, dan Algoritma Simulasi Taktis Hansi Flick.</p>
+        <div class="meta-badge">
+          ⚽ Flutter 3 & Dart 3 &nbsp;|&nbsp; Cross-Platform Android & Web &nbsp;|&nbsp; Clean Architecture
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+      <div class="category-tag">Pendahuluan</div>
+      <div class="slide-title">Latar Belakang & Masalah yang Diselesaikan</div>
+      <div class="cards-grid-3">
+        <div class="card crimson-border">
+          <div class="card-title">1. Tantangan Taktik Modern</div>
+          <ul class="bullet-list">
+            <li>Filosofi Hansi Flick mengandalkan Garis Pertahanan Sangat Tinggi (High Line) dan Gegenpressing intens.</li>
+            <li>Kompleksitas rotasi posisi fase bertahan (4-2-3-1) vs menyerang (3-2-4-1).</li>
+            <li>Risiko serangan balik cepat lawan jika offside trap gagal.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">2. Batasan Aplikasi Konvensional</div>
+          <ul class="bullet-list">
+            <li>Mayoritas papan taktik mobile hanya kanvas gambar diam tanpa data pemain asli.</li>
+            <li>Tidak terhubung dengan jadwal kompetisi riil (La Liga & Champions League).</li>
+            <li>Tidak ada mesin simulasi otomatis untuk menguji keputusan taktis.</li>
+          </ul>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">3. Solusi yang Dihadirkan</div>
+          <ul class="bullet-list">
+            <li>Papan taktik Drag-and-Drop interaktif untuk Mobile & Web.</li>
+            <li>Sinkronisasi skuad resmi 35 pemain dan jadwal laga terkini via AllSportsAPI.</li>
+            <li>Mesin simulasi cerdas penghitung xG, penguasaan bola, & evaluasi Grade taktik.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+      <div class="category-tag">Arsitektur Sistem</div>
+      <div class="slide-title">Tech Stack & Pola Desain (Clean Architecture)</div>
+      <div class="cards-grid-2">
+        <div class="card">
+          <div class="card-title white">Frontend & Framework</div>
+          <ul class="bullet-list">
+            <li>Flutter 3 & Dart 3: Single codebase untuk Web Chrome & Android APK.</li>
+            <li>Custom UI/UX: Barca Dark Theme, Glassmorphism, & pitch markings presisi.</li>
+            <li>Dukungan Mouse Pointer (Web) & Haptic Touch Long-Press (Android).</li>
+          </ul>
+        </div>
+        <div class="card gold-border">
+          <div class="card-title white">State Management (BLoC / Cubit)</div>
+          <ul class="bullet-list">
+            <li>flutter_bloc ^8.1: Memisahkan UI sepenuhnya dari logika bisnis aplikasi.</li>
+            <li>TacticalBoardCubit: Mengelola Starting XI, bangku cadangan, & swap formasi.</li>
+            <li>SimulationCubit: Mengontrol komputasi probabilitas laga & emit status live.</li>
+          </ul>
+        </div>
+        <div class="card green-border">
+          <div class="card-title white">Data Layer & REST API</div>
+          <ul class="bullet-list">
+            <li>TacticalRepository: Mengelola koneksi HTTP jaringan asinkron.</li>
+            <li>AllSportsAPI: Endpoint resmi tim ID 97 dan Fixtures La Liga & UCL.</li>
+            <li>Data Models: PlayerModel, MatchModel, OpponentModel, SimulationResultModel.</li>
+          </ul>
+        </div>
+        <div class="card crimson-border">
+          <div class="card-title white">In-Memory Caching (Anti Limit)</div>
+          <ul class="bullet-list">
+            <li>Mekanisme TTL Caching 6 Jam: Menghemat kuota API agar tidak terkena limit.</li>
+            <li>Zero-Downtime Fallback: Jika offline, otomatis memakai 35 data skuad lokal terverifikasi.</li>
+            <li>Algoritma sanitasi ID unik: Bebas duplikasi starting XI.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+      <div class="category-tag">Fitur Unggulan 1</div>
+      <div class="slide-title">Papan Taktik Interaktif & Drag-and-Drop Lintas Platform</div>
+      <div class="cards-grid-2">
+        <div class="card">
+          <div class="card-title">Mekanisme Papan Taktik (Tactical Pitch)</div>
+          <ul class="bullet-list">
+            <li>Lapangan Vertikal CustomPainter: Kotak penalti, titik penalti, dan garis tengah presisi.</li>
+            <li>11 Slot Starting XI Proporsional: Posisi akurat (GK, LB, LCB, RCB, RB, LDM, RDM, LW, AM, RW, CF).</li>
+            <li>Transisi Formasi Instan: Sakelar formasi antara 4-2-3-1 dan 3-2-4-1 (In-Possession Hansi Flick).</li>
+            <li>Visual Pin Informatif: Nomor punggung, nama pemain ringkas, dan gradien Blaugrana.</li>
+          </ul>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">Dukungan Drag & Drop Web & Mobile</div>
+          <ul class="bullet-list">
+            <li>Deteksi Platform Cerdas (kIsWeb): Draggable instan di Web, LongPressDraggable dengan haptic feedback di Mobile.</li>
+            <li>Fitur SWAP Instan: Menukar dua pemain yang sama-sama di lapangan langsung bertukar posisi secara mulus.</li>
+            <li>Substitusi Bangku Cadangan: Menarik pemain dari bench otomatis menggantikan pemain di lapangan.</li>
+            <li>Modal Bottom Sheet: Opsi alternatif pemilihan pemain via tap sentuhan cepat.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+      <div class="category-tag">Fitur Unggulan 2</div>
+      <div class="slide-title">Integrasi Live AllSportsAPI & Smart Caching</div>
+      <div class="cards-grid-2">
+        <div class="card gold-border">
+          <div class="card-title white">Konektivitas Live AllSportsAPI</div>
+          <ul class="bullet-list">
+            <li>Endpoint Tim FC Barcelona (ID: 97): 35 pemain terverifikasi lengkap dengan nomor & posisi.</li>
+            <li>Jadwal Laga Musim Ini: La Liga EA Sports & UEFA Champions League.</li>
+            <li>Lawan Riil: Villarreal CF, Sabah FC, Deportivo, Atlético Madrid, hingga Manchester City.</li>
+            <li>Profil Lawan Dinamis: Nilai serang, nilai bertahan, pressing vulnerability, & key player.</li>
+          </ul>
+        </div>
+        <div class="card crimson-border">
+          <div class="card-title white">Arsitektur Smart Caching (Anti Limit)</div>
+          <ul class="bullet-list">
+            <li>Tantangan: API publik memiliki batas kuota permintaan harian (rate limit).</li>
+            <li>Solusi TTL Cache: Data disimpan di memori selama 6 jam. Navigasi & simulasi memakai cache (0 kuota terbuang).</li>
+            <li>Refresh Manual: Pengguna tetap dapat memperbarui data via tombol refresh di AppBar.</li>
+            <li>Kecepatan Instan: Halaman dimuat dalam milidetik tanpa jeda berulang.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+      <div class="category-tag">Fitur Unggulan 3</div>
+      <div class="slide-title">Mesin Simulasi Taktis & Evaluasi Hansi Flick</div>
+      <div class="cards-grid-2">
+        <div class="card">
+          <div class="card-title">Tiga Parameter Taktis Utama</div>
+          <ul class="bullet-list">
+            <li>PPDA (Passes Per Defensive Action): Mengukur intensitas Gegenpressing merebut bola kembali.</li>
+            <li>Ketinggian Garis Pertahanan (1 - 10): Mengontrol agresivitas jebakan offside (Offside Trap).</li>
+            <li>Tempo Build-Up Serangan (1 - 10): Mengatur kecepatan sirkulasi bola dari lini tengah ke sayap.</li>
+          </ul>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">Output & Laporan Analisis Taktis</div>
+          <ul class="bullet-list">
+            <li>Probabilitas Hasil Laga: Persentase Win / Draw / Loss dihitung dinamis.</li>
+            <li>Proyeksi Statistik: Penguasaan Bola (%), xG Barcelona, xG Lawan, & Jumlah Jebakan Offside.</li>
+            <li>Evaluasi Grade Hansi Flick (A+, A, B, C): Menilai efektivitas strategi pengguna.</li>
+            <li>Peringatan Risiko Otomatis: Peringatan jika garis terlalu tinggi tanpa intensitas pressing cukup.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+      <div class="category-tag">Demonstrasi Aplikasi</div>
+      <div class="slide-title">Alur Kerja Pengguna (User Workflow)</div>
+      <div class="cards-grid-4">
+        <div class="card">
+          <div class="card-title">Langkah 1</div>
+          <ul class="bullet-list">
+            <li>Buka Home Dashboard.</li>
+            <li>Pilih lawan dari carousel jadwal resmi (misal Man City / Villarreal).</li>
+            <li>Klik 'Rancang Taktik'.</li>
+          </ul>
+        </div>
+        <div class="card gold-border">
+          <div class="card-title">Langkah 2</div>
+          <ul class="bullet-list">
+            <li>Masuk Papan Taktik Flickboard.</li>
+            <li>11 pemain terpasang otomatis.</li>
+            <li>Drag & drop pemain untuk rotasi atau masukkan dari bench.</li>
+          </ul>
+        </div>
+        <div class="card crimson-border">
+          <div class="card-title">Langkah 3</div>
+          <ul class="bullet-list">
+            <li>Sesuaikan 3 slider: PPDA, Garis Pertahanan, & Tempo Serangan.</li>
+            <li>Klik 'SIMULASIKAN PERTANDINGAN'.</li>
+          </ul>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">Langkah 4</div>
+          <ul class="bullet-list">
+            <li>Proses simulasi real-time.</li>
+            <li>Tampil Laporan Analisis Taktis lengkap: Win rate, xG, dan rekomendasi taktis.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide">
+      <div class="category-tag">Evaluasi Teknis</div>
+      <div class="slide-title">Tantangan Pengembangan & Solusi yang Diterapkan</div>
+      <div class="cards-grid-3">
+        <div class="card">
+          <div class="card-title">1. Responsivitas Layar</div>
+          <ul class="bullet-list">
+            <li>Tantangan: Layar desktop Chrome lebar membuat lapangan membesar berlebihan dan tombol menutupi isi layar.</li>
+            <li>Solusi: Menerapkan ConstrainedBox(maxWidth: 500) dan bottomNavigationBar resmi.</li>
+          </ul>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">2. Drag-and-Drop Hybrid</div>
+          <ul class="bullet-list">
+            <li>Tantangan: Gesture di web dan mobile memiliki kebiasaan interaksi berbeda.</li>
+            <li>Solusi: kIsWeb Draggable instan di Web, LongPressDraggable dengan delay 180ms di Android.</li>
+          </ul>
+        </div>
+        <div class="card crimson-border">
+          <div class="card-title">3. Batas Kuota API</div>
+          <ul class="bullet-list">
+            <li>Tantangan: Navigasi bolak-balik berisiko menghabiskan limit API eksternal.</li>
+            <li>Solusi: Smart In-Memory Caching 6 jam dan repository fallback offline 35 pemain.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide">
+      <div class="title-hero">
+        <div class="category-tag">KESIMPULAN & PENUTUP</div>
+        <h1 style="font-size: 42px;">Flickboard Memenuhi Standar Pemrograman Mobile Modern</h1>
+        <p style="font-size: 16px; margin: 24px auto;">
+          ✔ Pemisahan logika bisnis terstruktur dengan BLoC State Management.<br>
+          ✔ Pengalaman interaktif Drag-and-Drop responsif lintas platform.<br>
+          ✔ Integrasi Live REST API dengan proteksi Caching hemat kuota.<br>
+          ✔ Mesin simulasi taktis cerdas berbasis parameter pelatih Hansi Flick.
+        </p>
+        <h2 style="color: var(--accent-gold); font-size: 28px;">Terima Kasih! Sesi Tanya Jawab (Q&A) Dibuka.</h2>
+        <div style="margin-top: 20px;" class="meta-badge">Visca el Barça! 🔴🔵</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="slide-counter" id="counter">Slide 1 dari 9</div>
+    <div>
+      <button class="nav-btn" id="prevBtn" onclick="prevSlide()">◀ Sebelumnya</button>
+      <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Berikutnya ▶</button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateSlides() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      counter.innerText = `Slide ${currentSlide + 1} dari ${slides.length}`;
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+    });
+
+    updateSlides();
+  </script>
+</body>
+</html>

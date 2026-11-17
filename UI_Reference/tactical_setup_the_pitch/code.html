@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlickBoard - Tactical Setup</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#503d00",
+            "background": "#0f131d",
+            "tertiary-container": "#d2a500",
+            "on-surface": "#dee2f0",
+            "surface-variant": "#30353f",
+            "tertiary": "#f3c00e",
+            "secondary-fixed-dim": "#ffb2bf",
+            "on-surface-variant": "#c2c6d3",
+            "inverse-on-surface": "#2c303b",
+            "on-tertiary-fixed-variant": "#584400",
+            "error": "#ffb4ab",
+            "outline-variant": "#424751",
+            "on-background": "#dee2f0",
+            "tertiary-fixed-dim": "#f3c00e",
+            "surface-container-lowest": "#090e17",
+            "on-error": "#690005",
+            "surface-tint": "#a9c7ff",
+            "on-secondary": "#660027",
+            "on-secondary-container": "#ffb1bf",
+            "inverse-surface": "#dee2f0",
+            "secondary-fixed": "#ffd9de",
+            "inverse-primary": "#235eaa",
+            "on-primary-fixed-variant": "#00468b",
+            "on-tertiary": "#3d2e00",
+            "on-primary": "#003063",
+            "outline": "#8c919c",
+            "on-secondary-fixed": "#3f0015",
+            "surface-container-highest": "#30353f",
+            "primary-fixed-dim": "#a9c7ff",
+            "on-primary-fixed": "#001b3d",
+            "on-primary-container": "#9dc0ff",
+            "surface-container-high": "#252a34",
+            "error-container": "#93000a",
+            "primary-fixed": "#d6e3ff",
+            "tertiary-fixed": "#ffdf90",
+            "on-secondary-fixed-variant": "#90003a",
+            "surface-container": "#1b2029",
+            "surface-bright": "#343944",
+            "primary": "#a9c7ff",
+            "surface": "#0f131d",
+            "surface-dim": "#0f131d",
+            "primary-container": "#004d98",
+            "surface-container-low": "#171c25",
+            "on-error-container": "#ffdad6",
+            "secondary": "#ffb2bf",
+            "on-tertiary-fixed": "#241a00",
+            "secondary-container": "#a60144"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.25rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "headline-lg": ["Space Grotesk"],
+            "body-lg": ["Inter"],
+            "label-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "label-md": ["JetBrains Mono"],
+            "headline-xl": ["Space Grotesk"],
+            "label-lg": ["JetBrains Mono"],
+            "headline-md": ["Space Grotesk"],
+            "headline-xl-mobile": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "headline-lg-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-lg": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Glow utilities */
+    .glow-blaugrana {
+      box-shadow: 0 0 16px rgba(0, 77, 152, 0.65), 0 0 4px #d2a500;
+    }
+    .glow-cyan-vector {
+      filter: drop-shadow(0 0 5px rgba(169, 199, 255, 0.75));
+    }
+    .glow-neon-vector {
+      filter: drop-shadow(0 0 5px rgba(74, 222, 128, 0.8));
+    }
+    /* Custom range thumb styling */
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 9999px;
+      background: #a9c7ff;
+      border: 2px solid #004d98;
+      box-shadow: 0 0 8px #a9c7ff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased select-none font-body-md overflow-x-hidden min-h-screen pb-24">
+<!-- ==================== TOP APP BAR (SHARED COMPONENT) ==================== -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-margin-mobile h-14 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center gap-space-sm">
+<button class="p-space-xs rounded-lg text-primary hover:bg-surface-container-high transition-colors duration-150 active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-headline-md font-headline-md" data-icon="sports_soccer">sports_soccer</span>
+</button>
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface">FlickBoard</span>
+</div>
+<!-- Match Engine / Analytics Link -->
+<div class="flex items-center gap-space-xs">
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded-lg border border-outline-variant/40">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-tertiary">LIVE TELEMETRY</span>
+</div>
+<button class="p-space-xs rounded-lg text-primary hover:bg-surface-container-high transition-colors duration-150 active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-headline-md font-headline-md" data-icon="analytics">analytics</span>
+</button>
+</div>
+</header>
+<!-- ==================== MAIN TACTICAL VIEW ==================== -->
+<main class="pt-16 px-margin-mobile flex flex-col gap-space-md max-w-md mx-auto">
+<!-- SUB-HEADER & POSSESSION TOGGLE -->
+<section class="flex flex-col gap-space-xs mt-1">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">Hansi Flick Tactical Engine</span>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-on-surface">4-2-3-1 Asymmetric Blaugrana</h1>
+</div>
+<div class="p-1 bg-secondary-container/20 rounded border border-secondary-container/30">
+<span class="text-label-sm font-label-sm text-secondary font-bold">MATCHDAY 24</span>
+</div>
+</div>
+<!-- State Toggle: In Possession vs Out of Possession -->
+<div class="grid grid-cols-2 p-1 bg-surface-container-lowest rounded-xl border border-outline-variant/30 mt-1">
+<button class="py-1.5 px-space-sm rounded-lg text-label-md font-label-md font-semibold text-on-surface bg-primary-container text-white shadow-sm transition-all duration-150 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-sm font-normal" data-icon="sync">sync</span>
+          In Possession
+        </button>
+<button class="py-1.5 px-space-sm rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-all duration-150 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-sm font-normal" data-icon="shield">shield</span>
+          Out of Possession
+        </button>
+</div>
+</section>
+<!-- ==================== TACTICAL PITCH BOARD (VERTICAL 2D SIMULATOR) ==================== -->
+<section class="relative w-full rounded-xl bg-surface-container-lowest border border-outline-variant/40 overflow-hidden shadow-2xl">
+<!-- Pitch Header Telemetry Strip -->
+<div class="absolute top-2 left-2 right-2 z-20 flex justify-between items-center pointer-events-none">
+<div class="bg-surface-container-high/80 backdrop-blur-md px-2 py-0.5 rounded border border-outline-variant/50 flex items-center gap-1">
+<span class="text-label-sm font-label-sm text-primary">OFFENSIVE TRANSITION</span>
+</div>
+<div class="bg-surface-container-high/80 backdrop-blur-md px-2 py-0.5 rounded border border-outline-variant/50 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+<span class="text-label-sm font-label-sm text-on-surface">xG THREAT: 2.41</span>
+</div>
+</div>
+<!-- Pitch Surface Container -->
+<div class="relative w-full h-[410px] bg-[#0a0f18] p-3 flex flex-col justify-between">
+<!-- Pitch Markings (SVG overlay) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none stroke-white/[0.07]" xmlns="http://www.w3.org/2000/svg">
+<!-- Outer Boundary -->
+<rect fill="none" height="calc(100% - 24px)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" width="calc(100% - 24px)" x="12" y="12"></rect>
+<!-- Halfway Line & Center Circle -->
+<line stroke-dasharray="4 2" stroke-width="1" x1="12" x2="calc(100% - 12px)" y1="50%" y2="50%"></line>
+<circle cx="50%" cy="50%" fill="none" r="42" stroke-width="1"></circle>
+<circle cx="50%" cy="50%" fill="rgba(255,255,255,0.4)" r="2"></circle>
+<!-- Half-space guide channels -->
+<line stroke="rgba(255,255,255,0.03)" stroke-dasharray="2 4" x1="32%" x2="32%" y1="12" y2="calc(100% - 12px)"></line>
+<line stroke="rgba(255,255,255,0.03)" stroke-dasharray="2 4" x1="68%" x2="68%" y1="12" y2="calc(100% - 12px)"></line>
+<!-- Attacking Box (Top) -->
+<rect fill="none" height="68" stroke="rgba(255,255,255,0.09)" stroke-width="1" width="56%" x="22%" y="12"></rect>
+<rect fill="none" height="26" stroke="rgba(255,255,255,0.06)" stroke-width="1" width="28%" x="36%" y="12"></rect>
+<path d="M 40% 80 Q 50% 95 60% 80" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"></path>
+<!-- Defensive Box (Bottom) -->
+<rect fill="none" height="68" stroke="rgba(255,255,255,0.09)" stroke-width="1" width="56%" x="22%" y="calc(100% - 80px)"></rect>
+<rect fill="none" height="26" stroke="rgba(255,255,255,0.06)" stroke-width="1" width="28%" x="36%" y="calc(100% - 38px)"></rect>
+<path d="M 40% calc(100% - 80px) Q 50% calc(100% - 95px) 60% calc(100% - 80px)" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"></path>
+<!-- High Offside Line Marking Indicator -->
+<line class="opacity-75" stroke="#a60144" stroke-dasharray="4 4" stroke-width="1" x1="12" x2="calc(100% - 12px)" y1="58%" y2="58%"></line>
+<text fill="#ffb2bf" font-family="JetBrains Mono" font-size="9" letter-spacing="0.05em" x="18" y="56.5%">DEFENSIVE COMPACT LINE (58m)</text>
+<!-- TACTICAL VECTORS & PASSING LANES -->
+<!-- Casado -> Pedri connection lane -->
+<path class="glow-cyan-vector animate-pulse" d="M 130 270 Q 170 260 215 255" fill="none" stroke="#a9c7ff" stroke-dasharray="4 3" stroke-width="2"></path>
+<!-- Pedri -> Dani Olmo vertical progression vector -->
+<path class="glow-cyan-vector" d="M 215 250 Q 185 190 180 155" fill="none" stroke="#a9c7ff" stroke-width="2.5"></path>
+<polygon fill="#a9c7ff" points="180,150 176,158 184,158"></polygon>
+<!-- Dani Olmo -> Lamine Yamal asymmetric overload lane -->
+<path class="glow-neon-vector" d="M 195 145 Q 260 145 285 130" fill="none" stroke="#00e676" stroke-dasharray="3 3" stroke-width="2"></path>
+<!-- Olmo -> Lewandowski direct box penetration -->
+<path d="M 180 135 L 180 75" fill="none" stroke="#f3c00e" stroke-dasharray="2 2" stroke-width="1.8"></path>
+<polygon fill="#f3c00e" points="180,68 177,75 183,75"></polygon>
+<!-- Pressing Trigger Cone (Casadó & Pedri pivot lock) -->
+<polygon fill="rgba(0, 77, 152, 0.08)" points="130,270 170,220 220,250" stroke="rgba(169, 199, 255, 0.2)" stroke-dasharray="2 2"></polygon>
+</svg>
+<!-- ==================== PLAYER NODES (4-2-3-1 FORMATION) ==================== -->
+<!-- Attack / Striker: Lewandowski (9) -->
+<div class="absolute top-[38px] left-[46%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="relative w-8 h-8 rounded-full bg-secondary-container border-2 border-tertiary flex items-center justify-center shadow-lg transition-transform active:scale-110">
+<span class="text-label-md font-label-md text-white font-bold">9</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-green-400 border border-black"></span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5 whitespace-nowrap">Lewandowski</span>
+</div>
+<!-- Attacking Midfield Line -->
+<!-- LW: Raphinha (11) - Inverted -->
+<div class="absolute top-[108px] left-[15%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-8 h-8 rounded-full bg-primary-container border-2 border-primary flex items-center justify-center shadow-md">
+<span class="text-label-md font-label-md text-white font-bold">11</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5 whitespace-nowrap">Raphinha</span>
+</div>
+<!-- CAM: Dani Olmo (20) - Free 10 / Half Space -->
+<div class="absolute top-[125px] left-[50%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-20">
+<div class="relative w-8 h-8 rounded-full bg-primary-container border-2 border-tertiary flex items-center justify-center glow-blaugrana transition-transform scale-105">
+<span class="text-label-md font-label-md text-tertiary font-bold">20</span>
+<span class="absolute -inset-1 rounded-full border border-tertiary/40 animate-ping"></span>
+</div>
+<span class="text-label-sm font-label-sm text-tertiary font-semibold bg-surface-container-lowest/90 px-1 rounded mt-0.5 whitespace-nowrap">Dani Olmo</span>
+</div>
+<!-- RW: Lamine Yamal (19) - Asymmetric High & Wide -->
+<div class="absolute top-[96px] left-[84%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="relative w-8 h-8 rounded-full bg-secondary-container border-2 border-secondary flex items-center justify-center shadow-lg">
+<span class="text-label-md font-label-md text-white font-bold">19</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-tertiary border border-black"></span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5 whitespace-nowrap">L. Yamal</span>
+</div>
+<!-- Double Pivot (Midfield Engine) -->
+<!-- LDM: Marc Casadó (17) - Anchor -->
+<div class="absolute top-[215px] left-[35%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-8 h-8 rounded-full bg-primary-container border-2 border-outline flex items-center justify-center shadow">
+<span class="text-label-md font-label-md text-white font-bold">17</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5 whitespace-nowrap">Casadó</span>
+</div>
+<!-- RDM: Pedri (8) - Deep Playmaker -->
+<div class="absolute top-[205px] left-[65%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-8 h-8 rounded-full bg-primary-container border-2 border-primary flex items-center justify-center shadow-md">
+<span class="text-label-md font-label-md text-primary font-bold">8</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5 whitespace-nowrap">Pedri</span>
+</div>
+<!-- Defensive Backline (High Line 58m) -->
+<!-- LB: Balde (3) - High Wingback -->
+<div class="absolute top-[270px] left-[13%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border-2 border-primary flex items-center justify-center">
+<span class="text-label-sm font-label-sm text-on-surface font-bold">3</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5">Balde</span>
+</div>
+<!-- LCB: Íñigo Martínez (5) -->
+<div class="absolute top-[282px] left-[37%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border border-outline flex items-center justify-center">
+<span class="text-label-sm font-label-sm text-on-surface font-bold">5</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5">Martínez</span>
+</div>
+<!-- RCB: Pau Cubarsí (2) - Distributor -->
+<div class="absolute top-[282px] left-[63%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border border-outline flex items-center justify-center">
+<span class="text-label-sm font-label-sm text-on-surface font-bold">2</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5">Cubarsí</span>
+</div>
+<!-- RB: Jules Koundé (23) - Inverted Stopper -->
+<div class="absolute top-[275px] left-[87%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border-2 border-primary flex items-center justify-center">
+<span class="text-label-sm font-label-sm text-on-surface font-bold">23</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5">Koundé</span>
+</div>
+<!-- Goalkeeper: Marc-André ter Stegen (1) / Sweeper -->
+<div class="absolute bottom-[16px] left-[50%] -translate-x-1/2 flex flex-col items-center group cursor-pointer z-10">
+<div class="w-7 h-7 rounded-full bg-secondary-container/90 border-2 border-tertiary flex items-center justify-center">
+<span class="text-label-sm font-label-sm text-white font-bold">1</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface bg-surface-container-lowest/80 px-1 rounded mt-0.5">Ter Stegen</span>
+</div>
+</div>
+<!-- Quick Interactive Pitch Tool Strip -->
+<div class="px-space-md py-space-xs bg-surface-container-low border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-space-sm text-on-surface-variant">
+<span class="text-label-sm font-label-sm">TACTIC: RAPID OFF-BALL SHIFT</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2 py-0.5 rounded bg-surface-container text-label-sm font-label-sm text-primary border border-outline-variant/50 hover:bg-surface-container-high">
+            Reset Nodes
+          </button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-label-sm font-label-sm text-tertiary border border-outline-variant/50 hover:bg-surface-container-high">
+            Save Phase
+          </button>
+</div>
+</div>
+</section>
+<!-- ==================== TACTICAL CONSOLE / BOTTOM SHEET SLIDERS ==================== -->
+<section class="bg-surface-container-low rounded-xl border border-outline-variant/30 p-space-md flex flex-col gap-space-md shadow-lg">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-md font-headline-md" data-icon="tune">tune</span>
+<h2 class="text-headline-md font-headline-md text-on-surface">Telemetry Controls</h2>
+</div>
+<span class="text-label-sm font-label-sm bg-primary-container/30 text-primary px-2 py-0.5 rounded border border-primary/20">FLICK_SYS_v4.2</span>
+</div>
+<!-- SLIDER 1: Gegenpressing Intensity (PPDA) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-green-400"></span>
+<label class="text-label-md font-label-md text-on-surface font-semibold">Gegenpressing Intensity (PPDA)</label>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-highest px-2 py-0.5 rounded border border-outline-variant/40">
+<span class="text-label-sm font-label-sm text-on-surface-variant">PPDA:</span>
+<span class="text-label-md font-label-md text-green-400 font-bold">6.8</span>
+<span class="text-label-sm font-label-sm text-primary ml-1">(Aggressive)</span>
+</div>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="100" min="1" type="range" value="86"/>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Deep Passive</span>
+<span class="text-green-400">Mid Trap</span>
+<span class="text-secondary font-semibold">Ultra Aggressive</span>
+</div>
+</div>
+<!-- SLIDER 2: Defensive Line Height -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<label class="text-label-md font-label-md text-on-surface font-semibold">Defensive Line Height</label>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-highest px-2 py-0.5 rounded border border-outline-variant/40">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Height:</span>
+<span class="text-label-md font-label-md text-secondary font-bold">58m</span>
+<span class="text-label-sm font-label-sm text-on-surface ml-1">(Offside Trap)</span>
+</div>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" max="65" min="30" type="range" value="58"/>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Low Block (35m)</span>
+<span>Mid Block (48m)</span>
+<span class="text-secondary font-semibold">Offside Trap (58m+)</span>
+</div>
+</div>
+<!-- SLIDER 3: Passing Directness / Tempo -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<label class="text-label-md font-label-md text-on-surface font-semibold">Passing Directness / Tempo</label>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-highest px-2 py-0.5 rounded border border-outline-variant/40">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Style:</span>
+<span class="text-label-md font-label-md text-tertiary font-bold">Very High</span>
+</div>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-tertiary" max="100" min="1" type="range" value="92"/>
+<div class="flex justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Patient Tiki-Taka</span>
+<span>Vertical Rhythm</span>
+<span class="text-tertiary font-semibold">High Intensity P direct</span>
+</div>
+</div>
+</section>
+<!-- ==================== PROMINENT ACTION (SIMULATE MATCH FAB) ==================== -->
+<div class="sticky bottom-20 z-40 w-full pt-1">
+<button class="w-full py-3.5 px-space-lg rounded-xl bg-primary-container text-white border border-white/20 shadow-xl flex items-center justify-center gap-space-sm hover:brightness-110 active:scale-[0.98] transition-all duration-150">
+<span class="material-symbols-outlined text-headline-md font-headline-md text-tertiary animate-spin" data-icon="play_circle" style="animation-duration: 4s;">play_circle</span>
+<span class="text-label-lg font-label-lg tracking-wider font-bold text-white">SIMULATE MATCH CYCLE</span>
+<span class="text-label-sm font-label-sm bg-black/40 text-tertiary px-2 py-0.5 rounded ml-2">94.8% Readiness</span>
+</button>
+</div>
+</main>
+<!-- ==================== BOTTOM NAV BAR (SHARED COMPONENT) ==================== -->
+<!-- 
+    Authority: JSON mapping
+    Labels: ["Home", "Tactics", "History", "Settings"]
+    Active item: 'Tactics' (Exact match for this tactical setup screen)
+  -->
+<nav class="fixed bottom-0 w-full z-50 flex items-center justify-around px-margin-mobile py-space-xs bg-surface-container-lowest/95 backdrop-blur-xl pb-safe border-t border-outline-variant/30">
+<!-- Destination 1: Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-all duration-200 active:scale-95 hover:text-primary-fixed" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm uppercase mt-0.5">Home</span>
+</a>
+<!-- Destination 2: Tactics (ACTIVE - Exact Match) -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-space-md py-space-xs transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md" data-icon="strategy" style="font-variation-settings: 'FILL' 1;">strategy</span>
+<span class="text-label-sm font-label-sm uppercase mt-0.5 font-bold">Tactics</span>
+</a>
+<!-- Destination 3: History (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-all duration-200 active:scale-95 hover:text-primary-fixed" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md" data-icon="history">history</span>
+<span class="text-label-sm font-label-sm uppercase mt-0.5">History</span>
+</a>
+<!-- Destination 4: Settings (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-space-md py-space-xs transition-all duration-200 active:scale-95 hover:text-primary-fixed" href="#">
+<span class="material-symbols-outlined text-headline-md font-headline-md" data-icon="tune">tune</span>
+<span class="text-label-sm font-label-sm uppercase mt-0.5">Settings</span>
+</a>
+</nav>
+</body></html>

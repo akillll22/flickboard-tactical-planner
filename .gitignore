@@ -1,0 +1,46 @@
+# Flutter / Dart Build & Tools
+**/build/
+build/
+**/.dart_tool/
+.dart_tool/
+**/.pub/
+.pub/
+**/.pub-cache/
+.pub-cache/
+**/.flutter-plugins
+.flutter-plugins
+**/.flutter-plugins-dependencies
+.flutter-plugins-dependencies
+
+# Android Specific
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/.gradle/
+.gradle/
+**/local.properties
+local.properties
+**/GeneratedPluginRegistrant.java
+
+# IDE & Editor files
+.idea/
+**/.idea/
+*.iml
+**/*.iml
+*.iws
+*.ipr
+.vscode/
+**/.vscode/
+
+# Python & Caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+scratch/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
